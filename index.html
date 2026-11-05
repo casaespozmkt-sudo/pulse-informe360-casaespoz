@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulse · Casa Espoz — Informe 360</title>
+<style>
+:root{
+  --bg:#f2f1ee; --bg2:#ffffff; --bg3:#f8f7f5; --bg-hover:#ecebe7;
+  --border:#e3e2dd; --border2:#d8d7d1;
+  --t:#16171a; --t2:#5c5e66; --t3:#71737b;
+  --blue:#2f6fed; --orange:#f2762e; --green:#1aa668; --red:#e0405a; --amber:#c98a12; --purple:#7c5cf5; --pink:#e24a8d;
+  --blue-bg:rgba(47,111,237,.1); --orange-bg:rgba(242,118,46,.1); --green-bg:rgba(26,166,104,.1); --red-bg:rgba(224,64,90,.1); --amber-bg:rgba(201,138,18,.12);
+  --shadow:0 1px 2px rgba(20,20,20,.04), 0 1px 10px rgba(20,20,20,.03);
+  --radius:14px;
+}
+:root[data-theme="dark"]{
+  --bg:#0a0b0d; --bg2:#151619; --bg3:#1b1c20; --bg-hover:#202127;
+  --border:#2a2b30; --border2:#35363c;
+  --t:#f2f2f4; --t2:#9a9ca5; --t3:#6b6d75;
+  --blue:#4f8ef7; --orange:#fb923c; --green:#25d49a; --red:#ef5a74; --amber:#f5c130; --purple:#9b7cf7; --pink:#ec6cab;
+  --blue-bg:rgba(79,142,247,.14); --orange-bg:rgba(251,146,60,.14); --green-bg:rgba(37,212,154,.14); --red-bg:rgba(239,90,116,.14); --amber-bg:rgba(245,193,48,.14);
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 4px 24px rgba(0,0,0,.28);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0a0b0d; --bg2:#151619; --bg3:#1b1c20; --bg-hover:#202127;
+    --border:#2a2b30; --border2:#35363c;
+    --t:#f2f2f4; --t2:#9a9ca5; --t3:#6b6d75;
+    --blue:#4f8ef7; --orange:#fb923c; --green:#25d49a; --red:#ef5a74; --amber:#f5c130; --purple:#9b7cf7; --pink:#ec6cab;
+    --blue-bg:rgba(79,142,247,.14); --orange-bg:rgba(251,146,60,.14); --green-bg:rgba(37,212,154,.14); --red-bg:rgba(239,90,116,.14); --amber-bg:rgba(245,193,48,.14);
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 4px 24px rgba(0,0,0,.28);
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--t);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;font-size:14px;line-height:1.5;transition:background .15s ease,color .15s ease;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1360px;margin:0 auto;padding:0 20px}
+a{color:inherit}
+
+/* ---- top bar ---- */
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;border-bottom:1px solid var(--border);background:var(--bg2);position:sticky;top:0;z-index:50}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.client-logo-main{display:flex;align-items:center;flex-shrink:0;background:#0d0e11;border-radius:10px;padding:10px 14px;height:46px}
+.client-logo-main svg,.client-logo-main img{height:26px;width:auto;display:block}
+.brand-divider{width:1px;height:34px;background:var(--border2);flex-shrink:0}
+.fa-logo-main{display:flex;align-items:center;flex-shrink:0;background:#f5f0eb;border-radius:10px;padding:5px 14px;height:46px}
+.fa-logo-main svg,.fa-logo-main img{height:40px;width:auto;display:block}
+.fa-logo-sig{display:flex;align-items:center;flex-shrink:0;background:#f5f0eb;border-radius:8px;padding:6px 12px}
+.fa-logo-sig svg,.fa-logo-sig img{height:30px;width:auto;display:block}
+.bnm{font-size:17px;font-weight:700;letter-spacing:-.01em;white-space:nowrap}
+.bs{font-size:11.5px;color:var(--t2);margin-top:1px;white-space:nowrap}
+.ptag{font-size:9.5px;font-weight:700;letter-spacing:.09em;color:var(--purple);margin-top:2px}
+.top-right{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.pbtn{font-family:inherit;font-size:12.5px;font-weight:600;padding:8px 14px;border-radius:9px;border:1px solid var(--border2);background:var(--bg2);color:var(--t);cursor:pointer;white-space:nowrap;transition:all .12s}
+.pbtn:hover{background:var(--bg-hover)}
+.pbtn:focus-visible,.tb:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.pbtn.ghost{border-color:transparent;background:transparent}
+.live-badge{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--t2);padding:8px 12px}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green)}
+
+/* ---- tabs ---- */
+.tabsbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:12px 20px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tb{font-family:inherit;font-size:12.5px;font-weight:600;padding:8px 16px;border-radius:9px;border:1px solid var(--border2);background:var(--bg2);color:var(--t2);cursor:pointer;transition:all .12s}
+.tb:hover{color:var(--t);background:var(--bg-hover)}
+.tb.on{background:var(--t);color:var(--bg2);border-color:var(--t)}
+
+.pane{display:none;padding:26px 0 10px}
+.pane.on{display:block;animation:paneIn .28s ease}
+@keyframes paneIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@media (prefers-reduced-motion: reduce){.pane.on{animation:none}}
+
+/* ---- alerts band ---- */
+.alerts{display:flex;flex-direction:column;gap:8px;margin-bottom:22px}
+.alert{display:flex;gap:11px;align-items:flex-start;padding:13px 15px;border-radius:11px;border:1px solid var(--border);background:var(--bg2);box-shadow:var(--shadow)}
+.alert .dot{width:7px;height:7px;border-radius:50%;margin-top:6px;flex-shrink:0}
+.alert.crit .dot{background:var(--red)} .alert.risk .dot{background:var(--pink)} .alert.warn .dot{background:var(--amber)}
+.alert.struct .dot{background:var(--blue)} .alert.ok .dot{background:var(--green)}
+.alert b{font-weight:700} .alert .atxt{color:var(--t2);font-size:13px;margin-top:2px}
+.alert .atag{font-size:9.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:5px;margin-left:auto;flex-shrink:0}
+.alert.crit .atag{background:var(--red-bg);color:var(--red)} .alert.risk .atag{background:rgba(226,74,141,.14);color:var(--pink)}
+.alert.warn .atag{background:var(--amber-bg);color:var(--amber)} .alert.struct .atag{background:var(--blue-bg);color:var(--blue)}
+.alert.ok .atag{background:var(--green-bg);color:var(--green)}
+
+/* ---- alerts band: card-grid variant (narrower boxes, figure on top) ---- */
+.alerts-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+@media (max-width:980px){.alerts-grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.alerts-grid{grid-template-columns:1fr}}
+.alert-card{display:flex;flex-direction:column;padding:16px 17px 15px;border-radius:12px;border:1px solid var(--border);background:var(--bg2);box-shadow:var(--shadow);transition:transform .15s ease,box-shadow .15s ease}
+.alert-card:hover{transform:translateY(-2px)}
+.alert-card .ac-top{display:flex;align-items:center;gap:7px;margin-bottom:11px}
+.alert-card .ac-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.alert-card .ac-tag{font-size:9.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:2px 7px;border-radius:5px}
+.alert-card .ac-fig{font-size:26px;font-weight:800;letter-spacing:-.01em;font-variant-numeric:tabular-nums;margin-bottom:9px;line-height:1}
+.alert-card b{font-weight:700;font-size:13.5px;display:block;margin-bottom:5px;line-height:1.3}
+.alert-card .ac-txt{color:var(--t2);font-size:12.5px;line-height:1.5}
+.alert-card.crit .ac-dot{background:var(--red)} .alert-card.risk .ac-dot{background:var(--pink)} .alert-card.warn .ac-dot{background:var(--amber)}
+.alert-card.struct .ac-dot{background:var(--blue)} .alert-card.ok .ac-dot{background:var(--green)}
+.alert-card.crit .ac-fig{color:var(--red)} .alert-card.risk .ac-fig{color:var(--pink)}
+.alert-card.warn .ac-fig{color:var(--amber)} .alert-card.struct .ac-fig{color:var(--blue)}
+.alert-card.ok .ac-fig{color:var(--green)}
+.alert-card.crit .ac-tag{background:var(--red-bg);color:var(--red)} .alert-card.risk .ac-tag{background:rgba(226,74,141,.14);color:var(--pink)}
+.alert-card.warn .ac-tag{background:var(--amber-bg);color:var(--amber)} .alert-card.struct .ac-tag{background:var(--blue-bg);color:var(--blue)}
+.alert-card.ok .ac-tag{background:var(--green-bg);color:var(--green)}
+
+/* ---- kpi cards ---- */
+.kgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:22px}
+.g7{grid-template-columns:repeat(7,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:1100px){.kgrid{grid-template-columns:repeat(3,1fr)}}
+.kcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:17px 17px 15px;box-shadow:var(--shadow);transition:transform .15s ease,box-shadow .15s ease,border-color .15s ease}
+.kcard:hover{transform:translateY(-2px);border-color:var(--border2);box-shadow:0 4px 14px rgba(20,20,20,.08)}
+:root[data-theme="dark"] .kcard:hover{box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.klabel{font-size:11px;color:var(--t2);font-weight:600;margin-bottom:8px}
+.kval{font-size:25px;font-weight:700;letter-spacing:-.01em;line-height:1.1}
+.kval.sm{font-size:19px}
+.ksub{font-size:11px;color:var(--t3);margin-top:6px}
+.chip{display:inline-flex;align-items:center;gap:3px;font-size:11.5px;font-weight:700;margin-top:8px}
+.chip.up{color:var(--green)} .chip.down{color:var(--red)} .chip.na{color:var(--t3);font-weight:600}
+.kcard.accent-pink{border-top:2.5px solid var(--pink)}
+.kcard.accent-blue{border-top:2.5px solid var(--blue)}
+.kcard.accent-orange{border-top:2.5px solid var(--orange)}
+.kcard.accent-green{border-top:2.5px solid var(--green)}
+
+/* ---- section headers ---- */
+.sectitle{font-size:16px;font-weight:700;margin:30px 0 4px;letter-spacing:-.01em}
+.secsub{font-size:12.5px;color:var(--t2);margin-bottom:16px}
+.subsec{display:flex;align-items:center;gap:9px;margin:26px 0 12px}
+.subsec h3{font-size:14.5px;font-weight:700;margin:0}
+.tag{font-size:10px;font-weight:700;letter-spacing:.05em;color:var(--t2);background:var(--bg3);border:1px solid var(--border);padding:3px 9px;border-radius:999px}
+
+/* ---- cards / panels ---- */
+.panel{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.grid2{display:grid;grid-template-columns:2fr 1fr;gap:14px}
+.grid2b{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:900px){.grid2,.grid2b{grid-template-columns:1fr}}
+.card-title{font-size:13.5px;font-weight:700;margin-bottom:2px}
+.card-desc{font-size:11.5px;color:var(--t2);margin-bottom:14px}
+canvas{max-width:100%}
+/* Chart.js con maintainAspectRatio:false necesita un contenedor de alto FIJO en CSS,
+   si no, entra en loop de resize infinito (el canvas crece, el panel crece, se vuelve a medir...). */
+.chart-box{position:relative;width:100%;height:270px}
+.chart-box.lg{height:320px}
+.chart-box.wide{height:340px}
+
+/* ---- month cards (pipeline) ---- */
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:10px}
+@media(max-width:1000px){.mgrid{grid-template-columns:repeat(2,1fr)}}
+.mcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);transition:transform .15s ease,box-shadow .15s ease}
+.mcard:hover{transform:translateY(-2px)}
+.mcard.hl{border-color:var(--orange);box-shadow:0 0 0 1px var(--orange)}
+.mcard .mhead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+.mcard .mname{font-size:14.5px;font-weight:700}
+.mcard .mnew{font-size:9px;font-weight:700;color:var(--orange);background:var(--orange-bg);padding:2px 7px;border-radius:999px;letter-spacing:.04em}
+.mcard .mstats{display:flex;gap:16px;margin-bottom:10px}
+.mcard .mstat b{font-size:19px;font-weight:700;display:block}
+.mcard .mstat span{font-size:10.5px;color:var(--t2)}
+.mcard .mbar{height:5px;border-radius:3px;background:var(--bg3);overflow:hidden;margin-bottom:9px;display:flex}
+.mcard .mbar i{display:block;height:100%}
+.mcard .mfoot{font-size:11px;color:var(--t3)}
+
+/* ---- tables / lists ---- */
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{text-align:left;font-size:10px;font-weight:700;letter-spacing:.05em;color:var(--t2);text-transform:uppercase;padding:8px 10px;border-bottom:1px solid var(--border)}
+td{padding:9px 10px;border-bottom:1px solid var(--border)}
+tr:last-child td{border-bottom:none}
+.rank{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:6px;background:var(--bg3);font-size:10.5px;font-weight:700;color:var(--t2);margin-right:8px}
+.clientlist{display:flex;flex-direction:column;gap:2px}
+.crow{display:flex;align-items:center;justify-content:space-between;padding:8px 2px;border-bottom:1px solid var(--border)}
+.crow:last-child{border-bottom:none}
+.cname{font-weight:600;font-size:12.5px}
+.cval{font-size:12.5px;color:var(--t2);font-variant-numeric:tabular-nums}
+
+/* ---- executive summary ---- */
+.quote-box{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--purple);border-radius:10px;padding:16px 18px;font-size:13.5px;line-height:1.65;color:var(--t);margin-bottom:18px}
+.insight-list{display:flex;flex-direction:column;gap:10px}
+.insight-item{display:flex;gap:10px;padding:12px 13px;border-radius:10px;background:var(--bg3);border:1px solid var(--border)}
+.insight-item .ic{width:24px;height:24px;border-radius:7px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.insight-item .ic svg{width:14px;height:14px}
+.insight-item.info .ic{background:var(--blue-bg);color:var(--blue)}
+.insight-item.warn .ic{background:var(--amber-bg);color:var(--amber)}
+.insight-item.alert .ic{background:var(--red-bg);color:var(--red)}
+.insight-item.ok .ic{background:var(--green-bg);color:var(--green)}
+.insight-item .itxt{font-size:12.5px;line-height:1.55}
+.insight-item .itxt b{font-weight:700}
+.concl-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:13px}
+.concl-item:last-child{border-bottom:none}
+.concl-num{font-weight:700;color:var(--purple);flex-shrink:0}
+.reco-item{padding:13px;border-radius:10px;background:var(--bg3);border:1px solid var(--border);margin-bottom:9px}
+.reco-item .rhead{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.reco-num{width:20px;height:20px;border-radius:6px;background:var(--purple);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.reco-title{font-weight:700;font-size:12.5px}
+.reco-tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:999px;margin-left:auto}
+.reco-tag.inm{background:var(--amber-bg);color:var(--amber)}
+.reco-tag.est{background:var(--blue-bg);color:var(--blue)}
+.reco-text{font-size:12px;color:var(--t2);padding-left:28px}
+
+/* ---- methodology note ---- */
+.meta-note{font-size:11px;color:var(--t3);margin-top:20px;padding-top:14px;border-top:1px solid var(--border)}
+
+/* ---- footer ---- */
+.footer-note{padding:26px 0 8px;font-size:11.5px;color:var(--t3);text-align:center}
+.copyright-box{max-width:1360px;margin:0 auto;padding:16px 20px 28px;font-size:10.5px;line-height:1.6;color:var(--t3);text-align:center;border-top:1px solid var(--border);margin-top:10px}
+.signature{display:flex;align-items:center;justify-content:center;gap:9px;padding:18px 20px 6px;max-width:1360px;margin:0 auto}
+.sig-badge{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--purple),var(--blue));display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:800;flex-shrink:0}
+.sig-text{font-size:11.5px;color:var(--t2)}
+.sig-text b{color:var(--t);font-weight:700}
+
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:6px}
+</style>
+</head>
+<body>
+
+<div class="top">
+  <div class="brand">
+    <div class="fa-logo-main"><img src="logo-fernando.svg" alt="Fernando Abarzúa Sáez" loading="lazy"></div>
+    <div class="brand-divider"></div>
+    <div class="client-logo-main"><img src="logo-casaespoz.svg" alt="Casa Espoz" loading="lazy"></div>
+    <div>
+      <div class="bnm">Pulse · Informe 360</div>
+      <div class="bs">Casa Espoz · Cocina &amp; Eventos</div>
+      <div class="ptag">PULSE · EXECUTIVE INTELLIGENCE REPORTS</div>
+    </div>
+  </div>
+  <div class="top-right">
+    <div class="live-badge"><span class="live-dot"></span>Generado 5 noviembre 2026</div>
+    <button class="pbtn" onclick="toggleTheme()" id="themeBtn">Tema</button>
+  </div>
+</div>
+<div class="tabsbar">
+  <div class="wrap">
+    <div class="tabs">
+      <button class="tb on" onclick="go('cmp',this)">Resumen General</button>
+      <button class="tb" onclick="go('pipe',this)">Pipeline 2026</button>
+      <button class="tb" onclick="go('cortes',this)">Trimestre/Semestre</button>
+      <button class="tb" onclick="go('y2023',this)">2023</button>
+      <button class="tb" onclick="go('y2024',this)">2024</button>
+      <button class="tb" onclick="go('y2025',this)">2025</button>
+      <button class="tb" onclick="go('y2026',this)">2026</button>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+  
+<div class="pane on" id="p-cmp">
+  
+<div class="alerts-grid">
+  <div class="alert-card ok">
+    <div class="ac-top"><span class="ac-dot"></span><span class="ac-tag">positivo</span></div>
+    <div class="ac-fig">+26.1%</div>
+    <b>Negocio en crecimiento sostenido.</b>
+    <div class="ac-txt">Ingresos 2025 cerraron +26.1% vs 2024 ($1.520 millones vs $1.205 millones), y 2026 acumula +9.0% YTD (Ene–Sep) comparado como-contra-como con 2025.</div>
+  </div>
+  <div class="alert-card warn">
+    <div class="ac-top"><span class="ac-dot"></span><span class="ac-tag">warning</span></div>
+    <div class="ac-fig">28%</div>
+    <b>Dato ciego en alza.</b>
+    <div class="ac-txt">El 28% de los eventos 2026 aún no tiene monto asociado (vs 19% en 2025) — cotizaciones o eventos sin folio de venta cerrado, lo que sub-reporta el ingreso real del año en curso.</div>
+  </div>
+  <div class="alert-card struct">
+    <div class="ac-top"><span class="ac-dot"></span><span class="ac-tag">estructural</span></div>
+    <div class="ac-fig">-10.5%</div>
+    <b>Pax por evento a la baja, ticket al alza.</b>
+    <div class="ac-txt">Pax YTD -10.5% vs 2025 mismo período, mientras el ticket promedio se mantiene firme — señal de eventos más chicos pero de mayor valor por invitado.</div>
+  </div>
+  <div class="alert-card ok">
+    <div class="ac-top"><span class="ac-dot"></span><span class="ac-tag">positivo</span></div>
+    <div class="ac-fig">12%</div>
+    <b>Baja concentración de cartera.</b>
+    <div class="ac-txt">Los 10 clientes más grandes explican 12% del ingreso histórico — riesgo de dependencia de un solo cliente es bajo.</div>
+  </div>
+</div>
+
+  
+<div class="kgrid">
+  <div class="kcard"><div class="klabel">Ingreso histórico</div><div class="kval sm">$4.418.627.862</div><div class="ksub">Jul 2023 – Sep 2026</div></div>
+  <div class="kcard accent-green"><div class="klabel">2025 vs 2024</div><div class="kval sm">$1.519.861.446</div><span class="chip up">▲ +26.1%</span></div>
+  <div class="kcard accent-blue"><div class="klabel">2026 YTD vs 2025 YTD</div><div class="kval sm">$990.708.739</div><span class="chip up">▲ +9.0% (Ene-Sep)</span></div>
+  <div class="kcard accent-purple" style="border-top-color:var(--purple)"><div class="klabel">Proyección 2026</div><div class="kval sm">$1.660.806.696</div><div class="ksub">full year, run-rate estacional</div></div>
+  <div class="kcard"><div class="klabel">Eventos + pax 2026</div><div class="kval sm">382</div><div class="ksub">15.264 pax · 11.922 cotizados</div></div>
+  <div class="kcard accent-orange"><div class="klabel">Dato ciego 2026</div><div class="kval sm">28%</div><div class="ksub">eventos sin monto asociado</div></div>
+</div>
+
+  
+<div class="sectitle">Resumen ejecutivo</div>
+<div class="secsub">Lectura integral del negocio con el dataset más reciente — histórico Jul 2023–Sep 2026 más el pipeline operativo de octubre y noviembre 2026.</div>
+<div class="quote-box">Casa Espoz muestra una trayectoria de crecimiento sólida y consistente: ingresos +26% en 2025 y +9% YTD en 2026 contra el mismo período del año anterior, con una base de clientes amplia y poco concentrada. El principal foco de gestión no es de demanda sino de <b>trazabilidad comercial</b>: casi 3 de cada 10 eventos de 2026 todavía no tienen monto cerrado, lo que limita la visibilidad real de caja y proyección.</div>
+<div class="grid2b">
+  <div class="panel">
+    <div class="card-title">Lectura financiera</div>
+    <div class="card-desc">Óptica CFO — crecimiento, caja, riesgo de ingreso, pricing</div>
+    <div class="insight-list">
+      <div class="insight-item ok"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg></div><div class="itxt"><b>Crecimiento compuesto saludable:</b> dos años consecutivos de alza (+26% 2025, +9% YTD 2026), con proyección de cierre 2026 en torno a $1.660.806.696.</div></div>
+      <div class="insight-item warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.86 1.9 18a1.8 1.8 0 0 0 1.55 2.7h17.1A1.8 1.8 0 0 0 22.1 18L13.7 3.86a1.8 1.8 0 0 0-3.4 0z"/><line x1="12" y1="9.5" x2="12" y2="13.5"/><circle cx="12" cy="17" r="0.9" fill="currentColor" stroke="none"/></svg></div><div class="itxt"><b>Riesgo de ingreso no reconocido:</b> 28% de dato ciego en 2026 implica que el run-rate real podría ser mayor al proyectado si se cierra la facturación pendiente.</div></div>
+      <div class="insight-item info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><line x1="12" y1="16" x2="12" y2="11.3"/><circle cx="12" cy="7.8" r="0.9" fill="currentColor" stroke="none"/></svg></div><div class="itxt"><b>Pricing con espacio:</b> el ticket promedio se sostiene pese a la caída de pax por evento — evidencia de que el mix de servicios (montajes, producción, personalización) está capturando valor más allá del volumen de invitados.</div></div>
+      <div class="insight-item ok"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg></div><div class="itxt"><b>Cartera diversificada:</b> concentración top 10 de 12% reduce el riesgo de caja ante la pérdida de un cliente grande.</div></div>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="card-title">Lectura comercial</div>
+    <div class="card-desc">Óptica dirección de ventas — volumen vs ticket, mix, timing de pipeline</div>
+    <div class="insight-list">
+      <div class="insight-item info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><line x1="12" y1="16" x2="12" y2="11.3"/><circle cx="12" cy="7.8" r="0.9" fill="currentColor" stroke="none"/></svg></div><div class="itxt"><b>Volumen vs ticket:</b> pax YTD -10.5% pero ingreso YTD +9.0% — el equipo está vendiendo eventos de mayor valor relativo, no solo más grandes.</div></div>
+      <div class="insight-item ok"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 11.1v.9a9.8 9.8 0 1 1-5.8-9"/><polyline points="21.5 4.2 11.5 14.2 8.5 11.2"/></svg></div><div class="itxt"><b>Pipeline operativo activo:</b> octubre y noviembre 2026 ya suman 62 eventos agendados y 3.520 pax — la agenda de cierre de año está en movimiento.</div></div>
+      <div class="insight-item warn"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.86 1.9 18a1.8 1.8 0 0 0 1.55 2.7h17.1A1.8 1.8 0 0 0 22.1 18L13.7 3.86a1.8 1.8 0 0 0-3.4 0z"/><line x1="12" y1="9.5" x2="12" y2="13.5"/><circle cx="12" cy="17" r="0.9" fill="currentColor" stroke="none"/></svg></div><div class="itxt"><b>Brecha cotización→venta:</b> el gap entre personas cotizadas y eventos con folio sugiere pérdida de seguimiento comercial post-cotización que vale la pena auditar mes a mes.</div></div>
+      <div class="insight-item info"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.2"/><line x1="12" y1="16" x2="12" y2="11.3"/><circle cx="12" cy="7.8" r="0.9" fill="currentColor" stroke="none"/></svg></div><div class="itxt"><b>Estacionalidad manejable:</b> el patrón mensual 2024–2025 es la mejor referencia para dimensionar capacidad operativa de octubre-diciembre.</div></div>
+    </div>
+  </div>
+</div>
+<div class="subsec"><h3>Conclusiones</h3></div>
+<div class="panel">
+  <div class="concl-item"><span class="concl-num">1.</span>El negocio crece de forma sostenida y consistente en los tres últimos años con datos completos, sin señales de desaceleración.</div>
+  <div class="concl-item"><span class="concl-num">2.</span>La brecha de trazabilidad (dato ciego) es hoy el mayor riesgo de visibilidad financiera, no la demanda.</div>
+  <div class="concl-item"><span class="concl-num">3.</span>El mix de servicio está capturando más valor por invitado, compensando la caída en pax promedio por evento.</div>
+  <div class="concl-item"><span class="concl-num">4.</span>La base de clientes es sana y diversificada — el crecimiento no depende de pocas cuentas.</div>
+  <div class="concl-item"><span class="concl-num">5.</span>El pipeline de octubre-noviembre confirma que el cierre de año viene con agenda activa, aunque todavía sin monetizar en el sistema.</div>
+</div>
+<div class="subsec"><h3>Recomendaciones priorizadas</h3></div>
+<div class="grid2b">
+  <div>
+    <div class="reco-item"><div class="rhead"><span class="reco-num">1</span><span class="reco-title">Cerrar folios pendientes de 2026</span><span class="reco-tag inm">0-30 días</span></div><div class="reco-text">Auditar los eventos sin monto de los últimos 3 meses y priorizar el cierre de facturación — impacto directo en visibilidad de caja.</div></div>
+    <div class="reco-item"><div class="rhead"><span class="reco-num">2</span><span class="reco-title">Dar seguimiento a cotizaciones sin conversión</span><span class="reco-tag inm">0-30 días</span></div><div class="reco-text">Cruzar personas cotizadas vs eventos confirmados mes a mes para detectar fugas en el embudo comercial.</div></div>
+  </div>
+  <div>
+    <div class="reco-item"><div class="rhead"><span class="reco-num">3</span><span class="reco-title">Formalizar registro de etapa CRM</span><span class="reco-tag est">30-90 días</span></div><div class="reco-text">Extender el campo "Etapa CRM" (ya presente en julio) a todos los meses para medir conversión de forma sistemática.</div></div>
+    <div class="reco-item"><div class="rhead"><span class="reco-num">4</span><span class="reco-title">Planificar capacidad para el cierre de año</span><span class="reco-tag est">30-90 días</span></div><div class="reco-text">Usar la estacionalidad 2024-2025 para dimensionar equipo y stock de cara a octubre-diciembre, el tramo de mayor actividad histórica.</div></div>
+  </div>
+</div>
+
+  <div class="subsec"><h3>Evolución e ingresos</h3><span class="tag">histórico completo</span></div>
+  <div class="grid2">
+    <div class="panel"><div class="card-title">Ingreso mensual por año</div><div class="card-desc">Comparación mes a mes entre los 4 años con datos</div><div class="chart-box lg"><canvas id="chartMonthly"></canvas></div></div>
+    <div class="panel"><div class="card-title">Estacionalidad (prom. 2024-2025)</div><div class="card-desc">Patrón típico del negocio</div><div class="chart-box lg"><canvas id="chartSeason"></canvas></div></div>
+  </div>
+  <div class="grid2" style="margin-top:14px">
+    <div class="panel"><div class="card-title">Crecimiento año a año</div><div class="card-desc">Ingreso total por año (2023 y 2026 son parciales)</div><div class="chart-box lg"><canvas id="chartYearly"></canvas></div></div>
+    <div class="panel">
+      <div class="card-title">Top 10 clientes históricos</div><div class="card-desc">Por ingreso acumulado</div>
+      <table><thead><tr><th>Cliente</th><th style="text-align:right">Monto</th><th style="text-align:right">Eventos</th></tr></thead><tbody><tr><td><span class="rank">1</span>Intcomex</td><td style="text-align:right;font-variant-numeric:tabular-nums">$156.206.815</td><td style="text-align:right;color:var(--t2)">23</td></tr><tr><td><span class="rank">2</span>Osa Mayor / Bco. Chile</td><td style="text-align:right;font-variant-numeric:tabular-nums">$76.322.328</td><td style="text-align:right;color:var(--t2)">12</td></tr><tr><td><span class="rank">3</span>Imak/Enel</td><td style="text-align:right;font-variant-numeric:tabular-nums">$50.000.000</td><td style="text-align:right;color:var(--t2)">1</td></tr><tr><td><span class="rank">4</span>BTG Pactual</td><td style="text-align:right;font-variant-numeric:tabular-nums">$49.337.450</td><td style="text-align:right;color:var(--t2)">3</td></tr><tr><td><span class="rank">5</span>Leon</td><td style="text-align:right;font-variant-numeric:tabular-nums">$46.085.150</td><td style="text-align:right;color:var(--t2)">9</td></tr><tr><td><span class="rank">6</span>Teka</td><td style="text-align:right;font-variant-numeric:tabular-nums">$35.687.000</td><td style="text-align:right;color:var(--t2)">33</td></tr><tr><td><span class="rank">7</span>Copec</td><td style="text-align:right;font-variant-numeric:tabular-nums">$34.606.060</td><td style="text-align:right;color:var(--t2)">6</td></tr><tr><td><span class="rank">8</span>Tango Uno</td><td style="text-align:right;font-variant-numeric:tabular-nums">$34.027.546</td><td style="text-align:right;color:var(--t2)">4</td></tr><tr><td><span class="rank">9</span>Promored</td><td style="text-align:right;font-variant-numeric:tabular-nums">$33.460.610</td><td style="text-align:right;color:var(--t2)">6</td></tr><tr><td><span class="rank">10</span>Lab. Chile</td><td style="text-align:right;font-variant-numeric:tabular-nums">$32.995.400</td><td style="text-align:right;color:var(--t2)">10</td></tr></tbody></table>
+    </div>
+  </div>
+  <div class="meta-note">Metodología: eventos válidos extraídos de los backlogs mensuales de Casa Espoz (calendario operativo), con comparaciones como-contra-como (mismo tramo de meses) cuando el año es parcial. "Dato ciego" = eventos registrados sin monto de venta asociado.</div>
+</div>
+
+  
+<div class="pane" id="p-pipe">
+  <div class="sectitle">Pipeline operativo 2026</div>
+  <div class="secsub">Agenda de eventos, pax y cotizaciones mes a mes — incluye Octubre y Noviembre recién incorporados.</div>
+  <div class="kgrid g4" style="margin-bottom:22px">
+    <div class="kcard accent-blue"><div class="klabel">Eventos totales 2026</div><div class="kval">382</div><div class="ksub">Ene–Nov · 11 meses con agenda</div></div>
+    <div class="kcard accent-pink"><div class="klabel">Pax totales</div><div class="kval">15.264</div><div class="ksub">Invitados sumados en todos los eventos</div></div>
+    <div class="kcard accent-orange"><div class="klabel">Personas en cotizaciones</div><div class="kval">11.922</div><div class="ksub">11 meses con cotización activa</div></div>
+    <div class="kcard accent-green"><div class="klabel">Octubre + Noviembre (nuevo)</div><div class="kval">62</div><div class="ksub">eventos · 3.520 pax agendados</div></div>
+  </div>
+  <div class="panel" style="margin-bottom:22px">
+    <div class="card-title">Eventos y pax por mes — 2026</div>
+    <div class="card-desc">Volumen operativo mensual. Octubre y noviembre son los meses recién sumados al análisis.</div>
+    <div class="chart-box wide"><canvas id="chartPipeline"></canvas></div>
+  </div>
+  <div class="subsec"><h3>Detalle mensual</h3><span class="tag">Ene – Nov 2026</span></div>
+  <div class="mgrid">
+    
+    <div class="mcard">
+      <div class="mhead"><span class="mname">Ene 2026</span></div>
+      <div class="mstats">
+        <div class="mstat"><b>33</b><span>eventos</span></div>
+        <div class="mstat"><b>830</b><span>pax</span></div>
+        <div class="mstat"><b>16</b><span>cotizados</span></div>
+      </div>
+      <div class="mbar"><i style="width:48%;background:var(--blue)"></i><i style="width:52%;background:var(--bg-hover)"></i></div>
+      <div class="mfoot">797 personas en cotizaciones · Ene</div>
+    </div>
+    <div class="mcard">
+      <div class="mhead"><span class="mname">Feb 2026</span></div>
+      <div class="mstats">
+        <div class="mstat"><b>11</b><span>eventos</span></div>
+        <div class="mstat"><b>222</b><span>pax</span></div>
+        <div class="mstat"><b>1</b><span>cotizados</span></div>
+      </div>
+      <div class="mbar"><i style="width:9%;background:var(--blue)"></i><i style="width:91%;background:var(--bg-hover)"></i></div>
+      <div class="mfoot">50 personas en cotizaciones · Feb</div>
+    </div>
+    <div class="mcard">
+      <div class="mhead"><span class="mname">Mar 2026</span></div>
+      <div class="mstats">
+        <div class="mstat"><b>47</b><span>eventos</span></div>
+        <div class="mstat"><b>1.482</b><span>pax</span></div>
+        <div class="mstat"><b>26</b><span>cotizados</span></div>
+      </div>
+      <div class="mbar"><i style="width:55%;background:var(--blue)"></i><i style="width:45%;background:var(--bg-hover)"></i></div>
+      <div class="mfoot">1.431 personas en cotizaciones · Mar</div>
+    </div>
+    <div class="mcard">
+      <div class="mhead"><span class="mname">Abr 2026</span></div>
+      <div class="mstats">
+        <div class="mstat"><b>48</b><span>eventos</span></div>
+        <div class="mstat"><b>1.642</b><span>pax</span></div>
+        <div class="mstat"><b>27</b><span>cotizados</span></div>
+      </div>
+      <div class="mbar"><i style="width:56%;background:var(--blue)"></i><i style="width:44%;background:var(--bg-hover)"></i></div>
+      <div class="mfoot">1.493 personas en cotizaciones · Abr</div>
+    </div>
+    <div class="mcard">
+      <div class="mhead"><span class="mname">May 2026</span></div>
+      <div class="mstats">
+        <div class="mstat"><b>33</b><span>eventos</span></div>
+        <div class="mstat"><b>1.241</b><span>pax</span></div>
+        <div class="mstat"><b>19</b><span>cotizados</span></div>
+      </div>
+      <div class="mbar"><i style="width:58%;background:var(--blue)"></i><i style="width:42%;background:var(--bg-hover)"></i></div>
+      <div class="mfoot">1.013 personas en cotizaciones · May</div>
+    </div>
+    <div class="mcard">
+      <div class="mhead"><span class="mname">Jun 2026</span></div>
+      <div class="mstats">
+        <div class="mstat"><b>41</b><span>eventos</span></div>
+        <div class="mstat"><b>1.159</b><span>pax</span></div>
+        <div class="mstat"><b>20</b><span>cotizados</span></div>
+      </div>
+      <div class="mbar"><i style="width:49%;background:var(--blue)"></i><i style="width:51%;background:var(--bg-hover)"></i></div>
+      <div class="mfoot">784 personas en cotizaciones · Jun</div>
+    </div>
+    <div class="mcard">
+      <div class="mhead"><span class="mname">Jul 2026</span></div>
+      <div class="mstats">
+        <div class="mstat"><b>43</b><span>eventos</span></div>
+        <div class="mstat"><b>1.844</b><span>pax</span></div>
+        <div class="mstat"><b>20</b><span>cotizados</span></div>
+      </div>
+      <div class="mbar"><i style="width:47%;background:var(--blue)"></i><i style="width:53%;background:var(--bg-hover)"></i></div>
+      <div class="mfoot">1.347 personas en cotizaciones · Jul</div>
+    </div>
+    <div class="mcard">
+      <div class="mhead"><span class="mname">Ago 2026</span></div>
+      <div class="mstats">
+        <div class="mstat"><b>39</b><span>eventos</span></div>
+        <div class="mstat"><b>1.434</b><span>pax</span></div>
+        <div class="mstat"><b>23</b><span>cotizados</span></div>
+      </div>
+      <div class="mbar"><i style="width:59%;background:var(--blue)"></i><i style="width:41%;background:var(--bg-hover)"></i></div>
+      <div class="mfoot">1.010 personas en cotizaciones · Ago</div>
+    </div>
+    <div class="mcard">
+      <div class="mhead"><span class="mname">Sep 2026</span></div>
+      <div class="mstats">
+        <div class="mstat"><b>25</b><span>eventos</span></div>
+        <div class="mstat"><b>1.890</b><span>pax</span></div>
+        <div class="mstat"><b>22</b><span>cotizados</span></div>
+      </div>
+      <div class="mbar"><i style="width:88%;background:var(--blue)"></i><i style="width:12%;background:var(--bg-hover)"></i></div>
+      <div class="mfoot">1.640 personas en cotizaciones · Sep</div>
+    </div>
+    <div class="mcard hl">
+      <div class="mhead"><span class="mname">Oct 2026</span><span class="mnew">NUEVO</span></div>
+      <div class="mstats">
+        <div class="mstat"><b>30</b><span>eventos</span></div>
+        <div class="mstat"><b>1.343</b><span>pax</span></div>
+        <div class="mstat"><b>17</b><span>cotizados</span></div>
+      </div>
+      <div class="mbar"><i style="width:57%;background:var(--blue)"></i><i style="width:43%;background:var(--bg-hover)"></i></div>
+      <div class="mfoot">963 personas en cotizaciones · Oct</div>
+    </div>
+    <div class="mcard hl">
+      <div class="mhead"><span class="mname">Nov 2026</span><span class="mnew">NUEVO</span></div>
+      <div class="mstats">
+        <div class="mstat"><b>32</b><span>eventos</span></div>
+        <div class="mstat"><b>2.177</b><span>pax</span></div>
+        <div class="mstat"><b>24</b><span>cotizados</span></div>
+      </div>
+      <div class="mbar"><i style="width:75%;background:var(--blue)"></i><i style="width:25%;background:var(--bg-hover)"></i></div>
+      <div class="mfoot">1.394 personas en cotizaciones · Nov</div>
+    </div><div class="mcard" style="opacity:.45"><div class="mhead"><span class="mname">Dic</span></div><div class="mfoot">Sin datos cargados</div></div>
+  </div>
+  <div class="meta-note">Octubre y Noviembre 2026 provienen de los backlogs operativos más recientes: aún no tienen folio de venta/monto asociado (eventos en etapa de agenda o cotización), por eso se reportan en eventos, pax y personas cotizadas en vez de ingreso. En cuanto se facturen, se incorporan automáticamente a los cortes financieros de las demás pestañas.</div>
+</div>
+
+  
+<div class="pane" id="p-cortes">
+  <div class="sectitle">Cortes por trimestre y semestre</div>
+  <div class="secsub">Mismo dataset, agrupado en ventanas más amplias para ver tendencia sin ruido mensual.</div>
+  <div class="subsec"><h3>Por trimestre</h3><span class="tag">Q1–Q4</span></div>
+  <div class="grid2b">
+    <div class="panel"><div class="card-title">Ingreso por trimestre</div><div class="chart-box"><canvas id="chartQuarterRev"></canvas></div></div>
+    <div class="panel"><div class="card-title">Pax por trimestre</div><div class="chart-box"><canvas id="chartQuarterPax"></canvas></div></div>
+  </div>
+  <div class="panel" style="margin-top:14px">
+    <div class="card-title">Detalle por trimestre</div>
+    <table><thead><tr><th>Trimestre</th><th style="text-align:right">Ingreso</th><th style="text-align:right">Eventos</th><th style="text-align:right">Ticket prom.</th></tr></thead><tbody><tr><td>2023-Q3</td><td style='text-align:right'>$327.957.845</td><td style='text-align:right'>56</td><td style='text-align:right'>$5.856.390</td></tr><tr><td>2023-Q4</td><td style='text-align:right'>$375.014.969</td><td style='text-align:right'>78</td><td style='text-align:right'>$4.807.884</td></tr><tr><td>2024-Q1</td><td style='text-align:right'>$125.691.476</td><td style='text-align:right'>48</td><td style='text-align:right'>$2.618.572</td></tr><tr><td>2024-Q2</td><td style='text-align:right'>$277.409.283</td><td style='text-align:right'>81</td><td style='text-align:right'>$3.424.806</td></tr><tr><td>2024-Q3</td><td style='text-align:right'>$314.047.616</td><td style='text-align:right'>128</td><td style='text-align:right'>$2.453.497</td></tr><tr><td>2024-Q4</td><td style='text-align:right'>$487.936.489</td><td style='text-align:right'>159</td><td style='text-align:right'>$3.068.783</td></tr><tr><td>2025-Q1</td><td style='text-align:right'>$203.226.983</td><td style='text-align:right'>76</td><td style='text-align:right'>$2.674.039</td></tr><tr><td>2025-Q2</td><td style='text-align:right'>$287.898.974</td><td style='text-align:right'>107</td><td style='text-align:right'>$2.690.645</td></tr><tr><td>2025-Q3</td><td style='text-align:right'>$417.664.926</td><td style='text-align:right'>118</td><td style='text-align:right'>$3.539.533</td></tr><tr><td>2025-Q4</td><td style='text-align:right'>$611.070.563</td><td style='text-align:right'>132</td><td style='text-align:right'>$4.629.322</td></tr><tr><td>2026-Q1</td><td style='text-align:right'>$265.224.253</td><td style='text-align:right'>81</td><td style='text-align:right'>$3.274.373</td></tr><tr><td>2026-Q2</td><td style='text-align:right'>$328.351.541</td><td style='text-align:right'>106</td><td style='text-align:right'>$3.097.656</td></tr><tr><td>2026-Q3</td><td style='text-align:right'>$397.132.944</td><td style='text-align:right'>88</td><td style='text-align:right'>$4.512.874</td></tr></tbody></table>
+  </div>
+  <div class="subsec"><h3>Por semestre</h3><span class="tag">S1 / S2</span></div>
+  <div class="grid2b">
+    <div class="panel"><div class="card-title">Ingreso por semestre</div><div class="chart-box"><canvas id="chartSemesterRev"></canvas></div></div>
+    <div class="panel"><div class="card-title">Ticket promedio por semestre</div><div class="chart-box"><canvas id="chartSemesterTicket"></canvas></div></div>
+  </div>
+  <div class="panel" style="margin-top:14px">
+    <div class="card-title">Top clientes por semestre</div><div class="card-desc">Los 5 clientes de mayor ingreso en cada semestre</div>
+    <div class="grid2b" style="grid-template-columns:repeat(3,1fr)"><div><div style='font-size:11.5px;font-weight:700;color:var(--t2);margin-bottom:6px'>2023-S2</div><div class='clientlist'><div class='crow'><span class='cname'>Intcomex</span><span class='cval'>$68.065.000</span></div><div class='crow'><span class='cname'>Imak/Enel</span><span class='cval'>$50.000.000</span></div><div class='crow'><span class='cname'>BTG Pascual</span><span class='cval'>$14.900.000</span></div><div class='crow'><span class='cname'>F1/Vip RedBull</span><span class='cval'>$14.300.000</span></div><div class='crow'><span class='cname'>Tango Uno</span><span class='cval'>$13.650.000</span></div></div></div><div><div style='font-size:11.5px;font-weight:700;color:var(--t2);margin-bottom:6px'>2024-S1</div><div class='clientlist'><div class='crow'><span class='cname'>Intcomex</span><span class='cval'>$34.761.765</span></div><div class='crow'><span class='cname'>Lab. Chile</span><span class='cval'>$26.761.600</span></div><div class='crow'><span class='cname'>TGA Prod./</span><span class='cval'>$20.707.625</span></div><div class='crow'><span class='cname'>Tango Uno</span><span class='cval'>$20.377.546</span></div><div class='crow'><span class='cname'>Retail Eventos</span><span class='cval'>$17.025.000</span></div></div></div><div><div style='font-size:11.5px;font-weight:700;color:var(--t2);margin-bottom:6px'>2024-S2</div><div class='clientlist'><div class='crow'><span class='cname'>Europcar</span><span class='cval'>$24.927.250</span></div><div class='crow'><span class='cname'>BTG Pactual</span><span class='cval'>$19.930.300</span></div><div class='crow'><span class='cname'>Fundación Edudown</span><span class='cval'>$15.000.000</span></div><div class='crow'><span class='cname'>Casa Plan</span><span class='cval'>$13.972.050</span></div><div class='crow'><span class='cname'>Camila Labarca</span><span class='cval'>$11.796.050</span></div></div></div><div><div style='font-size:11.5px;font-weight:700;color:var(--t2);margin-bottom:6px'>2025-S1</div><div class='clientlist'><div class='crow'><span class='cname'>Intcomex</span><span class='cval'>$43.313.350</span></div><div class='crow'><span class='cname'>kuattro Prod.</span><span class='cval'>$32.031.685</span></div><div class='crow'><span class='cname'>Panisello</span><span class='cval'>$21.299.222</span></div><div class='crow'><span class='cname'>Gsiete</span><span class='cval'>$13.892.365</span></div><div class='crow'><span class='cname'>CMT</span><span class='cval'>$13.200.000</span></div></div></div><div><div style='font-size:11.5px;font-weight:700;color:var(--t2);margin-bottom:6px'>2025-S2</div><div class='clientlist'><div class='crow'><span class='cname'>Osa Mayor / Bco. Chile</span><span class='cval'>$66.668.895</span></div><div class='crow'><span class='cname'>Copec</span><span class='cval'>$24.809.010</span></div><div class='crow'><span class='cname'>Leon</span><span class='cval'>$22.094.700</span></div><div class='crow'><span class='cname'>Creaccion</span><span class='cval'>$21.129.450</span></div><div class='crow'><span class='cname'>Tarima</span><span class='cval'>$20.766.750</span></div></div></div><div><div style='font-size:11.5px;font-weight:700;color:var(--t2);margin-bottom:6px'>2026-S1</div><div class='clientlist'><div class='crow'><span class='cname'>CMT</span><span class='cval'>$19.162.749</span></div><div class='crow'><span class='cname'>Javier Del Río</span><span class='cval'>$18.934.842</span></div><div class='crow'><span class='cname'>Katara Prod.</span><span class='cval'>$17.338.500</span></div><div class='crow'><span class='cname'>Maca Sandoval</span><span class='cval'>$13.200.000</span></div><div class='crow'><span class='cname'>Preunic</span><span class='cval'>$12.899.914</span></div></div></div><div><div style='font-size:11.5px;font-weight:700;color:var(--t2);margin-bottom:6px'>2026-S2</div><div class='clientlist'><div class='crow'><span class='cname'>PF/Receta del Abuelo</span><span class='cval'>$23.495.714</span></div><div class='crow'><span class='cname'>BTG Pactual</span><span class='cval'>$21.787.150</span></div><div class='crow'><span class='cname'>Grupo León</span><span class='cval'>$17.749.970</span></div><div class='crow'><span class='cname'>Stantec</span><span class='cval'>$14.662.000</span></div><div class='crow'><span class='cname'>Orbita Prod. / Credicorp</span><span class='cval'>$14.440.000</span></div></div></div></div>
+  </div>
+  <div class="subsec"><h3>Ventas vs invitados</h3><span class="tag">tendencia mensual completa</span></div>
+  <div class="panel"><div class="card-title">Ingreso vs pax — Jul 2023 a Nov 2026</div><div class="card-desc">Eje izq: ingreso ($) · Eje der: pax</div><div class="chart-box wide"><canvas id="chartRevPax"></canvas></div></div>
+  <div class="subsec"><h3>Ticket promedio mensual</h3><span class="tag">multi-año</span></div>
+  <div class="panel"><div class="card-title">Ticket promedio por mes, todos los años</div><div class="chart-box lg"><canvas id="chartTicketTrend"></canvas></div></div>
+</div>
+
+  
+    <div class="pane" id="p-y2023">
+      <div class="sectitle">2023</div>
+      <div class="secsub">Primeros 6 meses operando con datos.</div>
+      <div class="alerts" style="margin-bottom:18px"><div class="alert struct"><span class="dot"></span><div><b>Año parcial (Jul-Dic), base inicial del negocio.</b></div></div></div>
+      <div class="kgrid g7">
+        <div class="kcard"><div class="klabel">Ingreso</div><div class="kval sm">$702.972.814</div><span class="chip na">sin comparable</span></div>
+        <div class="kcard"><div class="klabel">Eventos con monto</div><div class="kval sm">134</div><div class="ksub">de 142 registrados</div></div>
+        <div class="kcard"><div class="klabel">Ticket promedio</div><div class="kval sm">$5.246.066</div></div>
+        <div class="kcard accent-pink"><div class="klabel">Invitados totales</div><div class="kval sm">13.992</div><span class="chip na">sin comparable</span></div>
+        <div class="kcard"><div class="klabel">Valor por invitado</div><div class="kval sm">$50.530</div></div>
+        <div class="kcard"><div class="klabel">Clientes activos</div><div class="kval sm">115</div></div>
+        <div class="kcard accent-orange"><div class="klabel">Dato ciego</div><div class="kval sm">6%</div><div class="ksub">sin monto asociado</div></div>
+      </div>
+      
+      <div class="subsec"><h3>Ingreso mensual 2023</h3></div>
+      <div class="panel"><div class="chart-box lg"><canvas id="chartYear2023"></canvas></div></div>
+    </div>
+    
+    <div class="pane" id="p-y2024">
+      <div class="sectitle">2024</div>
+      <div class="secsub">Primer año completo del negocio.</div>
+      <div class="alerts" style="margin-bottom:18px"><div class="alert ok"><span class="dot"></span><div><b>Año base para comparaciones posteriores.</b></div></div></div>
+      <div class="kgrid g7">
+        <div class="kcard"><div class="klabel">Ingreso</div><div class="kval sm">$1.205.084.864</div><span class="chip up">▲ +71.4%  (6m)</span></div>
+        <div class="kcard"><div class="klabel">Eventos con monto</div><div class="kval sm">416</div><div class="ksub">de 447 registrados</div></div>
+        <div class="kcard"><div class="klabel">Ticket promedio</div><div class="kval sm">$2.896.839</div></div>
+        <div class="kcard accent-pink"><div class="klabel">Invitados totales</div><div class="kval sm">15.472</div><span class="chip up">▲ +9.3%  (6m)</span></div>
+        <div class="kcard"><div class="klabel">Valor por invitado</div><div class="kval sm">$74.258</div></div>
+        <div class="kcard"><div class="klabel">Clientes activos</div><div class="kval sm">249</div></div>
+        <div class="kcard accent-orange"><div class="klabel">Dato ciego</div><div class="kval sm">7%</div><div class="ksub">sin monto asociado</div></div>
+      </div>
+      
+      <div class="subsec"><h3>Ingreso mensual 2024</h3></div>
+      <div class="panel"><div class="chart-box lg"><canvas id="chartYear2024"></canvas></div></div>
+    </div>
+    
+    <div class="pane" id="p-y2025">
+      <div class="sectitle">2025</div>
+      <div class="secsub">Mejor año histórico.</div>
+      <div class="alerts" style="margin-bottom:18px"><div class="alert ok"><span class="dot"></span><div><b>Crecimiento de +26.1% vs 2024, el salto más fuerte del período.</b></div></div></div>
+      <div class="kgrid g7">
+        <div class="kcard"><div class="klabel">Ingreso</div><div class="kval sm">$1.519.861.446</div><span class="chip up">▲ +26.1%</span></div>
+        <div class="kcard"><div class="klabel">Eventos con monto</div><div class="kval sm">433</div><div class="ksub">de 534 registrados</div></div>
+        <div class="kcard"><div class="klabel">Ticket promedio</div><div class="kval sm">$3.510.073</div></div>
+        <div class="kcard accent-pink"><div class="klabel">Invitados totales</div><div class="kval sm">19.687</div><span class="chip up">▲ +23.2%</span></div>
+        <div class="kcard"><div class="klabel">Valor por invitado</div><div class="kval sm">$75.658</div></div>
+        <div class="kcard"><div class="klabel">Clientes activos</div><div class="kval sm">272</div></div>
+        <div class="kcard accent-orange"><div class="klabel">Dato ciego</div><div class="kval sm">19%</div><div class="ksub">sin monto asociado</div></div>
+      </div>
+      
+      <div class="subsec"><h3>Ingreso mensual 2025</h3></div>
+      <div class="panel"><div class="chart-box lg"><canvas id="chartYear2025"></canvas></div></div>
+    </div>
+    
+    <div class="pane" id="p-y2026">
+      <div class="sectitle">2026</div>
+      <div class="secsub">Año en curso.</div>
+      <div class="alerts" style="margin-bottom:18px"><div class="alert warn"><span class="dot"></span><div><b>Datos a Sep (financiero) + pipeline operativo a noviembre. Dato ciego 28%.</b></div></div></div>
+      <div class="kgrid g7">
+        <div class="kcard"><div class="klabel">Ingreso</div><div class="kval sm">$990.708.739</div><span class="chip up">▲ +9.0%  (Ene-Sep)</span></div>
+        <div class="kcard"><div class="klabel">Eventos con monto</div><div class="kval sm">275</div><div class="ksub">de 382 registrados</div></div>
+        <div class="kcard"><div class="klabel">Ticket promedio</div><div class="kval sm">$3.602.577</div></div>
+        <div class="kcard accent-pink"><div class="klabel">Invitados totales</div><div class="kval sm">15.264</div><span class="chip down">▼ -10.5%  (Ene-Sep)</span></div>
+        <div class="kcard"><div class="klabel">Valor por invitado</div><div class="kval sm">$80.886</div></div>
+        <div class="kcard"><div class="klabel">Clientes activos</div><div class="kval sm">200</div></div>
+        <div class="kcard accent-orange"><div class="klabel">Dato ciego</div><div class="kval sm">28%</div><div class="ksub">sin monto asociado</div></div>
+      </div>
+      
+        <div class="subsec"><h3>Pipeline operativo (oct-nov)</h3><span class="tag">recién incorporado</span></div>
+        <div class="kgrid g3">
+          <div class="kcard accent-orange"><div class="klabel">Octubre</div><div class="kval sm">30 eventos</div><div class="ksub">1.343 pax · 17 cotizados</div></div>
+          <div class="kcard accent-orange"><div class="klabel">Noviembre</div><div class="kval sm">32 eventos</div><div class="ksub">2.177 pax · 24 cotizados</div></div>
+          <div class="kcard"><div class="klabel">Suma oct+nov</div><div class="kval sm">62 eventos</div><div class="ksub">3.520 pax agendados</div></div>
+        </div>
+        
+      <div class="subsec"><h3>Ingreso mensual 2026</h3></div>
+      <div class="panel"><div class="chart-box lg"><canvas id="chartYear2026"></canvas></div></div>
+    </div>
+    
+</div>
+
+<div class="signature">
+  <div class="fa-logo-sig"><img src="logo-fernando.svg" alt="Fernando Abarzúa Sáez" loading="lazy"></div>
+  <div class="sig-text">Elaborado por <b>Fernando Abarzúa Sáez</b> · Marketing Estratégico — herramienta y análisis desarrollados con apoyo de Claude (Anthropic).</div>
+</div>
+<div class="copyright-box">
+  © 2026 Fernando Abarzúa Sáez. Pulse · Executive Intelligence Reports — herramienta, metodología de análisis y diseño de propiedad exclusiva del autor. Este reporte fue elaborado con información comercial entregada por Casa Espoz para uso exclusivo de diagnóstico y toma de decisiones internas de la empresa. Queda prohibida la reproducción, distribución, copia o uso de esta herramienta, su metodología, estructura o diseño visual, total o parcial, sin autorización expresa del autor.
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.6.1/dist/chart.umd.min.js"></script>
+<script>
+const DATA = {"meses": ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"], "years": [2023, 2024, 2025, 2026], "series": {"2023": [null, null, null, null, null, null, 75923000.0, 69265000.0, 182769845.0, 61926844.0, 152535384.0, 160552741.0], "2024": [67213895.0, 14945000.0, 43532581.067226894, 102640836.33613446, 115397606.6630252, 59370839.813445374, 97646299.52941176, 74181394.96638654, 142219921.18487394, 131467400.73949578, 158392947.69747898, 198076140.5042017], "2025": [52092279.71428572, 27381840.8907563, 123752862.08403362, 116490826.59521009, 91535245.59512606, 79872901.71109244, 124790315.86554621, 146109021.2887508, 146765589.15966386, 140348459.48319328, 223724823.75630254, 246997279.4117647], "2026": [92122060.84033613, 18891983.16806723, 154210209.03361344, 134592151.67268908, 105720479.15966386, 88038910.31302522, 141926867.80672267, 108450958.88235295, 146755117.70588237, null, null, null]}, "season": [59653087.35714286, 21163420.44537815, 83642721.57563026, 109565831.46567228, 103466426.12907563, 69621870.7622689, 111218307.69747898, 110145208.12756866, 144492755.1722689, 135907930.11134452, 191058885.72689074, 222536709.9579832], "yearsBar": [{"label": "2023 (6m)", "value": 702972814.0}, {"label": "2024", "value": 1205084863.5016806}, {"label": "2025", "value": 1519861445.5557256}, {"label": "2026 (parcial)", "value": 990708738.582353}], "yearData": {"2023": {"monto": 702972814.0, "n": 134, "ticket": 5246065.776119403, "pax": 13857.0, "clientes": 115, "dato_ciego_pct": 5.633802816901409, "n_total": 142}, "2024": {"monto": 1205084863.5016806, "n": 416, "ticket": 2896838.614186732, "pax": 15152.0, "clientes": 249, "dato_ciego_pct": 6.935123042505594, "n_total": 447}, "2025": {"monto": 1519861445.5557256, "n": 433, "ticket": 3510072.622530544, "pax": 18667.0, "clientes": 272, "dato_ciego_pct": 18.91385767790262, "n_total": 534}, "2026": {"monto": 990708738.582353, "n": 275, "ticket": 3602577.2312085563, "pax": 11354.0, "clientes": 200, "dato_ciego_pct": 27.748691099476442, "n_total": 382}}, "quarters": {"2023-Q3": {"monto": 327957845.0, "n": 56, "pax": 4686.0, "n_pax": 51, "ticket": 5856390.089285715}, "2023-Q4": {"monto": 375014969.0, "n": 78, "pax": 9171.0, "n_pax": 78, "ticket": 4807884.217948718}, "2024-Q1": {"monto": 125691476.06722689, "n": 48, "pax": 1742.0, "n_pax": 41, "ticket": 2618572.4180672267}, "2024-Q2": {"monto": 277409282.8126051, "n": 81, "pax": 3352.0, "n_pax": 65, "ticket": 3424805.9606494457}, "2024-Q3": {"monto": 314047615.6806723, "n": 128, "pax": 3638.0, "n_pax": 80, "ticket": 2453496.9975052522}, "2024-Q4": {"monto": 487936488.9411764, "n": 159, "pax": 6420.0, "n_pax": 128, "ticket": 3068782.949315575}, "2025-Q1": {"monto": 203226982.68907562, "n": 76, "pax": 2424.0, "n_pax": 54, "ticket": 2674039.24590889}, "2025-Q2": {"monto": 287898973.90142864, "n": 107, "pax": 3788.0, "n_pax": 85, "ticket": 2690644.6159012024}, "2025-Q3": {"monto": 417664926.3139608, "n": 118, "pax": 5900.0, "n_pax": 93, "ticket": 3539533.2738471255}, "2025-Q4": {"monto": 611070562.6512605, "n": 132, "pax": 6555.0, "n_pax": 111, "ticket": 4629322.444327731}, "2026-Q1": {"monto": 265224253.0420168, "n": 81, "pax": 2534.0, "n_pax": 51, "ticket": 3274373.4943458866}, "2026-Q2": {"monto": 328351541.1453782, "n": 106, "pax": 4032.0, "n_pax": 81, "ticket": 3097656.0485413037}, "2026-Q3": {"monto": 397132944.39495796, "n": 88, "pax": 4788.0, "n_pax": 71, "ticket": 4512874.368124522}}, "semesters": {"2023-S2": {"monto": 702972814.0, "n": 134, "pax": 13857.0, "n_pax": 129, "ticket": 5246065.776119403}, "2024-S1": {"monto": 403100758.87983197, "n": 129, "pax": 5094.0, "n_pax": 106, "ticket": 3124812.0843397826}, "2024-S2": {"monto": 801984104.6218488, "n": 287, "pax": 10058.0, "n_pax": 208, "ticket": 2794369.7025151527}, "2025-S1": {"monto": 491125956.59050405, "n": 183, "pax": 6212.0, "n_pax": 139, "ticket": 2683748.396669421}, "2025-S2": {"monto": 1028735488.9652213, "n": 250, "pax": 12455.0, "n_pax": 204, "ticket": 4114941.9558608853}, "2026-S1": {"monto": 593575794.1873949, "n": 187, "pax": 6566.0, "n_pax": 132, "ticket": 3174202.1079539834}, "2026-S2": {"monto": 397132944.39495796, "n": 88, "pax": 4788.0, "n_pax": 71, "ticket": 4512874.368124522}}, "quartersSeries": {"2023": [0, 0, 327957845.0, 375014969.0], "2024": [125691476.06722689, 277409282.8126051, 314047615.6806723, 487936488.9411764], "2025": [203226982.68907562, 287898973.90142864, 417664926.3139608, 611070562.6512605], "2026": [265224253.0420168, 328351541.1453782, 397132944.39495796, 0]}, "semesterSeries": {"2023": [0, 702972814.0], "2024": [403100758.87983197, 801984104.6218488], "2025": [491125956.59050405, 1028735488.9652213], "2026": [593575794.1873949, 397132944.39495796]}, "ticketSeries": {"2023": [null, null, null, null, null, null, 4466058.823529412, 3148409.090909091, 10751167.352941176, 2692471.4782608696, 6355641.0, 5179120.677419355], "2024": [3537573.4210526315, 2989000.0, 1813857.5444677873, 4887658.87314926, 3297074.4760864344, 2374833.5925378148, 2169917.7673202613, 1648475.4436974786, 3742629.504865104, 2987895.4713521767, 2879871.7763177995, 3301269.008403362], "2025": [1929343.693121693, 2106295.4531351, 3437579.5023342674, 3148400.718789462, 2773795.321064426, 2158727.073272769, 2971197.9967987193, 4058583.924687522, 3669139.7289915965, 3793201.6076538726, 5202902.878053547, 4749947.6809954755], "2026": [2878814.401260504, 1717453.0152788393, 4058163.3956214064, 3058912.538015661, 3524015.9719887953, 2751215.947282038, 3942412.994631185, 3739688.2373225153, 6380657.291560103, null, null, null]}, "paxSeries": {"2023": [null, null, null, null, null, null, 1042.0, 883.0, 2761.0, 4258.0, 3180.0, 1733.0], "2024": [904.0, 189.0, 649.0, 970.0, 1571.0, 811.0, 1288.0, 979.0, 1371.0, 1736.0, 2064.0, 2620.0], "2025": [504.0, 337.0, 1583.0, 1551.0, 1164.0, 1073.0, 1749.0, 2491.0, 1660.0, 1655.0, 2081.0, 2819.0], "2026": [830.0, 222.0, 1482.0, 1632.0, 1241.0, 1159.0, 1844.0, 1254.0, 1690.0, null, null, null]}, "timelineLabels": ["Jul 23", "Ago 23", "Sep 23", "Oct 23", "Nov 23", "Dic 23", "Ene 24", "Feb 24", "Mar 24", "Abr 24", "May 24", "Jun 24", "Jul 24", "Ago 24", "Sep 24", "Oct 24", "Nov 24", "Dic 24", "Ene 25", "Feb 25", "Mar 25", "Abr 25", "May 25", "Jun 25", "Jul 25", "Ago 25", "Sep 25", "Oct 25", "Nov 25", "Dic 25", "Ene 26", "Feb 26", "Mar 26", "Abr 26", "May 26", "Jun 26", "Jul 26", "Ago 26", "Sep 26", "Oct 26", "Nov 26"], "timelineRevenue": [75923000.0, 69265000.0, 182769845.0, 61926844.0, 152535384.0, 160552741.0, 67213895.0, 14945000.0, 43532581.067226894, 102640836.33613446, 115397606.6630252, 59370839.813445374, 97646299.52941176, 74181394.96638654, 142219921.18487394, 131467400.73949578, 158392947.69747898, 198076140.5042017, 52092279.71428572, 27381840.8907563, 123752862.08403362, 116490826.59521009, 91535245.59512606, 79872901.71109244, 124790315.86554621, 146109021.2887508, 146765589.15966386, 140348459.48319328, 223724823.75630254, 246997279.4117647, 92122060.84033613, 18891983.16806723, 154210209.03361344, 134592151.67268908, 105720479.15966386, 88038910.31302522, 141926867.80672267, 108450958.88235295, 146755117.70588237, null, null], "timelinePax": [1042.0, 883.0, 2761.0, 4258.0, 3180.0, 1733.0, 904.0, 189.0, 649.0, 970.0, 1571.0, 811.0, 1288.0, 979.0, 1371.0, 1736.0, 2064.0, 2620.0, 504.0, 337.0, 1583.0, 1551.0, 1164.0, 1073.0, 1749.0, 2491.0, 1660.0, 1655.0, 2081.0, 2819.0, 830.0, 222.0, 1482.0, 1642.0, 1241.0, 1159.0, 1844.0, 1434.0, 1890.0, 1343.0, 2177.0], "paxByYear": {"2023": {"pax": 13992.0, "n_con_pax": 132, "ticket_pp": 50529.68275961608, "delta_vs_prev": null, "delta_label": null}, "2024": {"pax": 15472.0, "n_con_pax": 322, "ticket_pp": 74258.24505060208, "delta_vs_prev": 10.577472841623784, "delta_label": "vs 2023 (6m)"}, "2025": {"pax": 19687.0, "n_con_pax": 361, "ticket_pp": 75657.80324995847, "delta_vs_prev": 27.242761116856258, "delta_label": "vs 2024"}, "2026": {"pax": 15264.0, "n_con_pax": 261, "ticket_pp": 80886.04531871935, "delta_vs_prev": -9.50912971306616, "delta_label": "vs 2025 (Ene-Nov)"}}, "topClientsOverall": [{"cliente": "Intcomex", "monto": 156206814.70588237, "n": 23}, {"cliente": "Osa Mayor / Bco. Chile", "monto": 76322328.0, "n": 12}, {"cliente": "Imak/Enel", "monto": 50000000.0, "n": 1}, {"cliente": "BTG Pactual", "monto": 49337450.0, "n": 3}, {"cliente": "Leon", "monto": 46085150.0, "n": 9}, {"cliente": "Teka", "monto": 35687000.0, "n": 33}, {"cliente": "Copec", "monto": 34606060.0, "n": 6}, {"cliente": "Tango Uno", "monto": 34027546.0, "n": 4}, {"cliente": "Promored", "monto": 33460610.0, "n": 6}, {"cliente": "Lab. Chile", "monto": 32995400.0, "n": 10}], "topClientsBySemester": {"2023-S2": [{"cliente": "Intcomex", "monto": 68065000.0, "n": 5}, {"cliente": "Imak/Enel", "monto": 50000000.0, "n": 1}, {"cliente": "BTG Pascual", "monto": 14900000.0, "n": 1}, {"cliente": "F1/Vip RedBull", "monto": 14300000.0, "n": 1}, {"cliente": "Tango Uno", "monto": 13650000.0, "n": 1}], "2024-S1": [{"cliente": "Intcomex", "monto": 34761764.705882356, "n": 3}, {"cliente": "Lab. Chile", "monto": 26761600.0, "n": 8}, {"cliente": "TGA Prod./", "monto": 20707625.0, "n": 1}, {"cliente": "Tango Uno", "monto": 20377546.0, "n": 3}, {"cliente": "Retail Eventos", "monto": 17025000.0, "n": 3}], "2024-S2": [{"cliente": "Europcar", "monto": 24927250.0, "n": 15}, {"cliente": "BTG Pactual", "monto": 19930300.0, "n": 1}, {"cliente": "Fundación Edudown", "monto": 15000000.0, "n": 1}, {"cliente": "Casa Plan", "monto": 13972050.0, "n": 6}, {"cliente": "Camila Labarca", "monto": 11796050.0, "n": 2}], "2025-S1": [{"cliente": "Intcomex", "monto": 43313350.0, "n": 11}, {"cliente": "kuattro Prod.", "monto": 32031685.0, "n": 3}, {"cliente": "Panisello", "monto": 21299222.0, "n": 7}, {"cliente": "Gsiete", "monto": 13892365.0, "n": 4}, {"cliente": "CMT", "monto": 13200000.0, "n": 1}], "2025-S2": [{"cliente": "Osa Mayor / Bco. Chile", "monto": 66668895.0, "n": 10}, {"cliente": "Copec", "monto": 24809010.0, "n": 3}, {"cliente": "Leon", "monto": 22094700.0, "n": 3}, {"cliente": "Creaccion", "monto": 21129450.0, "n": 5}, {"cliente": "Tarima", "monto": 20766750.0, "n": 3}], "2026-S1": [{"cliente": "CMT", "monto": 19162749.0, "n": 1}, {"cliente": "Javier Del Río", "monto": 18934842.0, "n": 2}, {"cliente": "Katara Prod.", "monto": 17338500.0, "n": 1}, {"cliente": "Maca Sandoval", "monto": 13200000.0, "n": 2}, {"cliente": "Preunic", "monto": 12899914.0, "n": 1}], "2026-S2": [{"cliente": "PF/Receta del Abuelo", "monto": 23495714.0, "n": 2}, {"cliente": "BTG Pactual", "monto": 21787150.0, "n": 1}, {"cliente": "Grupo León", "monto": 17749970.0, "n": 2}, {"cliente": "Stantec", "monto": 14662000.0, "n": 3}, {"cliente": "Orbita Prod. / Credicorp", "monto": 14440000.0, "n": 1}]}, "pipelineMonth": {"1": {"mes": "Ene", "eventos": 33, "pax": 830.0, "cotizaciones": 16, "personas_cotizadas": 797.0, "confirmados": null, "por_confirmar": null, "origen": "historico"}, "2": {"mes": "Feb", "eventos": 11, "pax": 222.0, "cotizaciones": 1, "personas_cotizadas": 50.0, "confirmados": null, "por_confirmar": null, "origen": "historico"}, "3": {"mes": "Mar", "eventos": 47, "pax": 1482.0, "cotizaciones": 26, "personas_cotizadas": 1431.0, "confirmados": null, "por_confirmar": null, "origen": "historico"}, "4": {"mes": "Abr", "eventos": 48, "pax": 1642.0, "cotizaciones": 27, "personas_cotizadas": 1493.0, "confirmados": null, "por_confirmar": null, "origen": "historico"}, "5": {"mes": "May", "eventos": 33, "pax": 1241.0, "cotizaciones": 19, "personas_cotizadas": 1013.0, "confirmados": null, "por_confirmar": null, "origen": "historico"}, "6": {"mes": "Jun", "eventos": 41, "pax": 1159.0, "cotizaciones": 20, "personas_cotizadas": 784.0, "confirmados": null, "por_confirmar": null, "origen": "historico"}, "7": {"mes": "Jul", "eventos": 43, "pax": 1844.0, "cotizaciones": 20, "personas_cotizadas": 1347.0, "confirmados": null, "por_confirmar": null, "origen": "historico"}, "8": {"mes": "Ago", "eventos": 39, "pax": 1434.0, "cotizaciones": 23, "personas_cotizadas": 1010.0, "confirmados": null, "por_confirmar": null, "origen": "historico"}, "9": {"mes": "Sep", "eventos": 25, "pax": 1890.0, "cotizaciones": 22, "personas_cotizadas": 1640.0, "confirmados": null, "por_confirmar": null, "origen": "historico"}, "10": {"mes": "Oct", "eventos": 30, "pax": 1343.0, "cotizaciones": 17, "personas_cotizadas": 963.0, "confirmados": null, "por_confirmar": null, "origen": "pipeline_nuevo"}, "11": {"mes": "Nov", "eventos": 32, "pax": 2177.0, "cotizaciones": 24, "personas_cotizadas": 1394.0, "confirmados": null, "por_confirmar": null, "origen": "pipeline_nuevo"}, "12": {"mes": "Dic", "eventos": 0, "pax": 0, "cotizaciones": 0, "personas_cotizadas": 0, "confirmados": null, "por_confirmar": null, "origen": "sin_datos"}}};
+function go(id, btn){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.getElementById('p-'+id).classList.add('on');
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+}
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+  try{ localStorage.setItem('pulse-theme', t); }catch(e){}
+}
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme') ||
+    (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark':'light');
+  applyTheme(cur==='dark' ? 'light' : 'dark');
+}
+(function(){
+  try{
+    const saved = localStorage.getItem('pulse-theme');
+    if(saved) document.documentElement.setAttribute('data-theme', saved);
+  }catch(e){}
+})();
+
+const CSSVAR = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+Chart.defaults.font.family = "-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,Helvetica,Arial,sans-serif";
+Chart.defaults.font.size = 11;
+function gridOpt(){
+  return { color: CSSVAR('--border'), drawTicks:false };
+}
+function tickOpt(){
+  return { color: CSSVAR('--t2') };
+}
+function baseOpts(extra){
+  return Object.assign({
+    responsive:true, maintainAspectRatio:false,
+    plugins:{ legend:{ labels:{ color:CSSVAR('--t2'), usePointStyle:true, boxWidth:7, padding:14 } } },
+    scales:{
+      x:{ grid:{display:false}, ticks:tickOpt() },
+      y:{ grid:gridOpt(), ticks:tickOpt(), beginAtZero:true }
+    }
+  }, extra||{});
+}
+const YEAR_COLORS = {2023:'#8d8f97', 2024:CSSVAR('--blue'), 2025:CSSVAR('--purple'), 2026:CSSVAR('--orange')};
+const fmtM = v => v==null? null : Math.round(v/1e6*10)/10;
+const fmtCLP = v => v==null ? null : '$'+Math.round(v).toLocaleString('es-CL');
+let CHARTS = {};
+function mkChart(id, cfg){
+  const el = document.getElementById(id); if(!el) return;
+  if(CHARTS[id]) CHARTS[id].destroy();
+  CHARTS[id] = new Chart(el.getContext('2d'), cfg);
+}
+function renderAll(){
+  Chart.defaults.plugins.tooltip.backgroundColor = CSSVAR('--t');
+  Chart.defaults.plugins.tooltip.titleColor = CSSVAR('--bg2');
+  Chart.defaults.plugins.tooltip.bodyColor = CSSVAR('--bg2');
+  Chart.defaults.plugins.tooltip.borderColor = 'transparent';
+  Chart.defaults.plugins.tooltip.borderWidth = 0;
+  Chart.defaults.plugins.tooltip.padding = 10;
+  Chart.defaults.plugins.tooltip.cornerRadius = 8;
+  Chart.defaults.plugins.tooltip.boxPadding = 4;
+  Chart.defaults.plugins.tooltip.titleFont = { weight:'700', size:11.5 };
+  Chart.defaults.plugins.tooltip.bodyFont = { size:11.5 };
+  Chart.defaults.plugins.tooltip.displayColors = true;
+  Chart.defaults.plugins.tooltip.usePointStyle = true;
+  // ---- Resumen: ingreso mensual por año ----
+  mkChart('chartMonthly', { type:'line', data:{ labels:DATA.meses, datasets: DATA.years.map(y=>({
+      label:String(y), data:(DATA.series[y]||[]).map(fmtM), borderColor:YEAR_COLORS[y], backgroundColor:YEAR_COLORS[y],
+      tension:.35, spanGaps:true, pointRadius:2, borderWidth:2
+    })) }, options: baseOpts({ scales:{ x:{grid:{display:false},ticks:tickOpt()}, y:{grid:gridOpt(),ticks:{...tickOpt(), callback:v=>'$'+v+'M'}} } }) });
+
+  mkChart('chartSeason', { type:'bar', data:{ labels:DATA.meses, datasets:[{ label:'Promedio', data:DATA.season.map(fmtM), backgroundColor:CSSVAR('--purple'), borderRadius:5 }] },
+    options: baseOpts({ plugins:{legend:{display:false}}, scales:{ x:{grid:{display:false},ticks:tickOpt()}, y:{grid:gridOpt(),ticks:{...tickOpt(),callback:v=>'$'+v+'M'}} } }) });
+
+  mkChart('chartYearly', { type:'bar', data:{ labels:DATA.yearsBar.map(x=>x.label), datasets:[{ data:DATA.yearsBar.map(x=>fmtM(x.value)),
+      backgroundColor:DATA.yearsBar.map((x,i)=>Object.values(YEAR_COLORS)[i]||CSSVAR('--blue')), borderRadius:6 }] },
+    options: baseOpts({ plugins:{legend:{display:false}}, scales:{ x:{grid:{display:false},ticks:tickOpt()}, y:{grid:gridOpt(),ticks:{...tickOpt(),callback:v=>'$'+v+'M'}} } }) });
+
+  // ---- Pipeline 2026 ----
+  const pmKeys = Object.keys(DATA.pipelineMonth).map(Number).sort((a,b)=>a-b);
+  mkChart('chartPipeline', { type:'bar', data:{ labels: pmKeys.map(k=>DATA.pipelineMonth[k].mes),
+      datasets:[
+        { label:'Eventos', data: pmKeys.map(k=>DATA.pipelineMonth[k].eventos), backgroundColor:CSSVAR('--blue'), borderRadius:5, yAxisID:'y' },
+        { type:'line', label:'Pax', data: pmKeys.map(k=>DATA.pipelineMonth[k].pax||null), borderColor:CSSVAR('--orange'), backgroundColor:CSSVAR('--orange'), yAxisID:'y1', tension:.3, borderWidth:2, pointRadius:3 },
+      ] }, options: baseOpts({ scales:{ x:{grid:{display:false},ticks:tickOpt()},
+        y:{ position:'left', grid:gridOpt(), ticks:tickOpt(), title:{display:true,text:'eventos',color:CSSVAR('--t2')} },
+        y1:{ position:'right', grid:{display:false}, ticks:tickOpt(), title:{display:true,text:'pax',color:CSSVAR('--t2')} } } }) });
+
+  // ---- Trimestre/semestre ----
+  const qLabels = ['Q1','Q2','Q3','Q4'];
+  mkChart('chartQuarterRev', { type:'line', data:{ labels:qLabels, datasets: DATA.years.map(y=>({ label:String(y), data:(DATA.quartersSeries[y]||[]).map(fmtM),
+      borderColor:YEAR_COLORS[y], backgroundColor:YEAR_COLORS[y], tension:.3, borderWidth:2, pointRadius:3 })) },
+    options: baseOpts({ scales:{ x:{grid:{display:false},ticks:tickOpt()}, y:{grid:gridOpt(),ticks:{...tickOpt(),callback:v=>'$'+v+'M'}} } }) });
+
+  const qPax = {};
+  DATA.years.forEach(y=>{ qPax[y] = qLabels.map((_,i)=>{
+    const k = y+'-Q'+(i+1); return (DATA.quarters[k]&&DATA.quarters[k].pax) || null; }); });
+  mkChart('chartQuarterPax', { type:'bar', data:{ labels:qLabels, datasets: DATA.years.map(y=>({ label:String(y), data:qPax[y], backgroundColor:YEAR_COLORS[y], borderRadius:5 })) },
+    options: baseOpts() });
+
+  const semLabels = [].concat(...DATA.years.map(y=>['S1','S2'].map(s=>y+' '+s)));
+  const semRev = [].concat(...DATA.years.map(y=>(DATA.semesterSeries[y]||[null,null]).map(fmtM)));
+  mkChart('chartSemesterRev', { type:'bar', data:{ labels:semLabels, datasets:[{ data:semRev, backgroundColor:CSSVAR('--blue'), borderRadius:5 }] },
+    options: baseOpts({ plugins:{legend:{display:false}}, scales:{ x:{grid:{display:false},ticks:tickOpt()}, y:{grid:gridOpt(),ticks:{...tickOpt(),callback:v=>'$'+v+'M'}} } }) });
+
+  const semTicket = [].concat(...DATA.years.map(y=>{ return ['S1','S2'].map((s,i)=>{ const k=y+'-S'+(i+1); return (DATA.semesters[k]&&DATA.semesters[k].ticket) ? Math.round(DATA.semesters[k].ticket) : null; }); }));
+  mkChart('chartSemesterTicket', { type:'bar', data:{ labels:semLabels, datasets:[{ data:semTicket, backgroundColor:CSSVAR('--green'), borderRadius:5 }] },
+    options: baseOpts({ plugins:{legend:{display:false}, tooltip:{callbacks:{label:ctx=>fmtCLP(ctx.parsed.y)}}}, scales:{ x:{grid:{display:false},ticks:tickOpt()}, y:{grid:gridOpt(),ticks:{...tickOpt(),callback:v=>fmtCLP(v)}} } }) });
+
+  mkChart('chartRevPax', { data:{ labels:DATA.timelineLabels, datasets:[
+      { type:'bar', label:'Ingreso', data:DATA.timelineRevenue.map(fmtM), backgroundColor:CSSVAR('--blue'), yAxisID:'y', borderRadius:3 },
+      { type:'line', label:'Pax', data:DATA.timelinePax, borderColor:CSSVAR('--orange'), backgroundColor:CSSVAR('--orange'), yAxisID:'y1', tension:.3, borderWidth:2, pointRadius:2 },
+    ] }, options: baseOpts({ scales:{ x:{grid:{display:false},ticks:{...tickOpt(),maxRotation:90,minRotation:60}},
+      y:{position:'left',grid:gridOpt(),ticks:{...tickOpt(),callback:v=>'$'+v+'M'}}, y1:{position:'right',grid:{display:false},ticks:tickOpt()} } }) });
+
+  mkChart('chartTicketTrend', { type:'line', data:{ labels:DATA.meses, datasets: DATA.years.map(y=>({ label:String(y), data:(DATA.ticketSeries[y]||[]).map(v=>v?Math.round(v):null),
+      borderColor:YEAR_COLORS[y], backgroundColor:YEAR_COLORS[y], tension:.3, spanGaps:true, borderWidth:2, pointRadius:2 })) },
+    options: baseOpts({ plugins:{legend:{labels:{color:CSSVAR('--t2'),usePointStyle:true,boxWidth:7,padding:14}}, tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+fmtCLP(ctx.parsed.y)}}}, scales:{ x:{grid:{display:false},ticks:tickOpt()}, y:{grid:gridOpt(),ticks:{...tickOpt(),callback:v=>fmtCLP(v)}} } }) });
+
+  // ---- Paneles anuales ----
+  DATA.years.forEach(y=>{
+    mkChart('chartYear'+y, { type:'bar', data:{ labels:DATA.meses, datasets:[{ data:(DATA.series[y]||[]).map(fmtM), backgroundColor:YEAR_COLORS[y], borderRadius:5 }] },
+      options: baseOpts({ plugins:{legend:{display:false}}, scales:{ x:{grid:{display:false},ticks:tickOpt()}, y:{grid:gridOpt(),ticks:{...tickOpt(),callback:v=>'$'+v+'M'}} } }) });
+  });
+}
+window.addEventListener('DOMContentLoaded', renderAll);
+const _origToggle = toggleTheme;
+toggleTheme = function(){ _origToggle(); setTimeout(renderAll, 60); };
+</script>
+</body>
+</html>
